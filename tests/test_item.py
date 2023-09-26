@@ -7,7 +7,7 @@ from src.item import Item
 
 
 
-def test_calculate_total_price():
+def test_item():
 
     item1 = Item("Смартфон", 10000, 20)
     # устанавливаем новый уровень цен
