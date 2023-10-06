@@ -9,6 +9,13 @@ from src.item import Item
 def item1():
     return Item("Смартфон", 10000, 20)
 
+def test___repr__(item1):
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test___str__(item1):
+    assert str(item1) == 'Смартфон'
+
+
 def test_apply_discount(item1):
     Item.pay_rate = 0.8
     item1.apply_discount()
