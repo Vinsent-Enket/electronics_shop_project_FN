@@ -1,3 +1,6 @@
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,10 +16,16 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
 
     def calculate_total_price(self) -> float:
         """
@@ -31,3 +40,32 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
+
+    @property
+    def name(self):
+        """
+        возвращает наименование товара
+        """
+        return f'{self.__name}'
+
+    @name.setter
+    def name(self, name):
+        """Метод срабатывает при операции присваивания, устанавливая наименование товара"""
+        if len(name) >= 10:
+            name = name[:10]
+        self.__name = name
+
+    @classmethod
+    def instantiate_from_csv(cls, path_file):
+        cls.all = []
+        # немного помучался с кодировкой, так и должно быть)))?
+        # на стороннем сайте вбил текст из файла и он подсказал мне кодировку,
+        # на маке он пытался воспринять его как utf-8
+        with open(path_file, 'r', encoding='WINDOWS-1251') as csvfile:
+            file = csv.DictReader(csvfile)
+            for line in file:
+                Item(line['name'], line['price'], line['quantity'])
+
+    @staticmethod
+    def string_to_number(string):
+        return int(float(string))
