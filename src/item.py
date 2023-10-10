@@ -27,6 +27,9 @@ class Item:
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        return self.quantity + other.quantity
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -58,9 +61,6 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, path_file):
         cls.all = []
-        # немного помучался с кодировкой, так и должно быть)))?
-        # на стороннем сайте вбил текст из файла и он подсказал мне кодировку,
-        # на маке он пытался воспринять его как utf-8
         with open(path_file, 'r', encoding='WINDOWS-1251') as csvfile:
             file = csv.DictReader(csvfile)
             for line in file:
@@ -69,3 +69,5 @@ class Item:
     @staticmethod
     def string_to_number(string):
         return int(float(string))
+
+
