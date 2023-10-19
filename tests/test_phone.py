@@ -13,7 +13,6 @@ def test___repr__(phone1):
 def test___str__(phone1):
     assert str(phone1) == 'iPhone 14'
 
-
 def test_apply_discount(phone1):
     phone1.pay_rate = 0.8
     phone1.apply_discount()
@@ -26,14 +25,8 @@ def test_apply_discount(phone1):
     phone1.pay_rate = 2
     phone1.apply_discount()
     assert phone1.price == 240000
+
 def test_name(phone1):
     assert phone1.name == 'iPhone 14'
     phone1.name = "1234567890смарт"
     assert phone1.name == "1234567890"
-
-
-
-
-
-
-
