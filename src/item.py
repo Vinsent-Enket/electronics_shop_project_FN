@@ -79,8 +79,6 @@ class Item:
         except FileNotFoundError:
             print('Файл не найден')
 
-
-
     @staticmethod
     def string_to_number(string):
         return int(float(string))
