@@ -1,5 +1,7 @@
 import csv
 
+from src.my_exeption import InstantiateCSVError
+
 
 class Item:
     """
@@ -61,14 +63,22 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path_file):
+        """
+        При чтении файла проверяем количество колонок, путем проверки ключей, и выбрасываем исключение
+        Для демонстрации items2 как раз не имеет одной колонки
+        """
+
         cls.all = []
-        with open(path_file, 'r', encoding='WINDOWS-1251') as csvfile:
-            file = csv.DictReader(csvfile)
-            for line in file:
-                Item(line['name'], line['price'], line['quantity'])
+        try:
+            with open(path_file, 'r', encoding='WINDOWS-1251') as csvfile:
+                file = csv.DictReader(csvfile)
+                for line in file:
+                    if len(line.keys()) != 3:
+                        raise InstantiateCSVError()
+                    Item(line['name'], line['price'], line['quantity'])
+        except FileNotFoundError:
+            print('Файл не найден')
 
     @staticmethod
     def string_to_number(string):
         return int(float(string))
-
-
