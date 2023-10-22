@@ -46,7 +46,7 @@ def test_name(item1):
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('../src/items.csv')  # создание объектов из данных файла
+    Item.instantiate_from_csv(SRC_PATH / 'items.csv')  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
