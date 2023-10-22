@@ -50,7 +50,7 @@ class Item:
     @property
     def name(self):
         """
-        возвращает наименование товара
+        Возвращает наименование товара
         """
         return f'{self.__name}'
 
@@ -72,7 +72,7 @@ class Item:
                         raise InstantiateCSVError()
                     Item(line['name'], line['price'], line['quantity'])
         except FileNotFoundError:
-            print('Файл не найден')
+            raise ('Файл не найден')
 
 
 
@@ -80,6 +80,6 @@ class Item:
     def string_to_number(string):
         return int(float(string))
 
-Item.instantiate_from_csv('../src/items2.csv')  # создание объектов из данных файла
+Item.instantiate_from_csv('../src/items3.csv')  # создание объектов из данных файла
 
 Item.instantiate_from_csv('../src/items2.csv')  # создание объектов из данных файла

@@ -50,7 +50,7 @@ class Item:
     @property
     def name(self):
         """
-        возвращает наименование товара
+        Возвращает наименование товара
         """
         return f'{self.__name}'
 
@@ -77,7 +77,7 @@ class Item:
                         raise InstantiateCSVError()
                     Item(line['name'], line['price'], line['quantity'])
         except FileNotFoundError:
-            print('Файл не найден')
+            raise FileNotFoundError('Файл не найден')
 
     @staticmethod
     def string_to_number(string):
